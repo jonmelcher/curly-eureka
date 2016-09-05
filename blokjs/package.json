@@ -1,0 +1,19 @@
+{
+  "name": "blokjs",
+  "version": "0.0.0",
+  "description": "Proof of concept / playing around with Rollup",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:jonmelcher/curly-eureka.git"
+  },
+  "author": "Jonathan Melcher <jonathan.melcher@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "eslint": "^3.4.0",
+    "eslint-config-google": "^0.6.0",
+    "rollup": "^0.34.13",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-eslint": "^2.0.2"
+  }
+}
