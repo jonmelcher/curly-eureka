@@ -38,7 +38,7 @@ describe('block rotations', () => {
         });
         it('should affect a vector not on the y-axis', () => {
             const vector = [ -34, 43 ];
-            deepEqual(reflectX(vector), [ 34, -43 ]);
+            deepEqual(reflectX(vector), [ 34, 43 ]);
         });
         it('should do nothing if applied an even number of times', () => {
             const vector = [ -34, 43 ];
