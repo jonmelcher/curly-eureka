@@ -20,4 +20,15 @@ describe('blocks', () => {
             strictEqual(b.id, 3);
         });
     });
+    describe('context-full-coordinates', () => {
+        it('provides the properly transformed coordinates', () => {
+            const coords = [ [ 0, 0 ], [ -1, 0 ], [ 1, 0 ]];
+            const b = new Block(0);
+            b.coordinates = coords;
+            deepEqual(
+                b.getContextualCoordinates([ 1, 1 ]),
+                [ [ 1, 1 ], [ 0, 1 ], [ 2, 1 ] ]
+            );
+        });
+    });
 });
