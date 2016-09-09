@@ -8,10 +8,16 @@ describe('blocks', () => {
             throws(() => new Block('derp'));
             throws(() => new Block({}));
             throws(() => new Block(-1));
+            throws(() => new Block(0, 4));
+            throws(() => new Block(0, 'derp'));
+            throws(() => new Block(0, {}));
+            throws(() => new Block(0, [ '1', 1 ]));
         });
         it('is okay with good input', () => {
             ok(new Block(0));
             ok(new Block(5));
+            ok(new Block(5, []));
+            ok(new Block(5, [ [ 1, 1 ] ]));
         });
         it('is constructed with the right properties', () => {
             const b = new Block(3);
