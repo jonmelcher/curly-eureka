@@ -4,6 +4,7 @@ export function Board(size) {
     }
     this._squares = new Array(size);
     this._size = size;
+    this._hasPlayed = new Array();
 }
 
 Board.prototype.place = function(block, location) {
@@ -23,6 +24,9 @@ Board.prototype._validatePlacement = function(coordinates, playerIndex) {
     if (this._sameAdjacentPlayer(x, y, playerIndex)) {
         throw TypeError(`block placed adjacent to same player [${x}, ${y}]`);
     }
+    if (!this._hasPlayed[playerIndex] && !this._isStartingPlacment(coordinates, playerIndex)) {
+        throw TypeError(`first play by player at invalid location [${x}, ${y}]`);
+    }
 };
 
 Board.prototype._addSquare = function(coordinates, playerIndex) {
@@ -32,6 +36,7 @@ Board.prototype._addSquare = function(coordinates, playerIndex) {
         col = this._squares[x] = new Array(this._size);
     }
     col[y] = playerIndex;
+    this._hasPlayed[playerIndex] = true;
 }
 
 Board.prototype._isOffBoard = function(coordinate) {
@@ -47,6 +52,11 @@ Board.prototype._getSquare = function(x, y) {
     return this._squares[x] && this._squares[x][y];
 }
 
+Board.prototype._isStartingPlacment = function (coordinates, playerIndex) {
+    return getStartingPlacement(this._size, playerIndex)
+        .every((c, idx) => coordinates[idx] === c);
+};
+
 function adjacentSquares(x, y) {
     return [
         [ x - 1, y ],
@@ -54,4 +64,18 @@ function adjacentSquares(x, y) {
         [ x, y + 1 ],
         [ x, y - 1 ]
     ];
+}
+
+let startingPlacements;
+function getStartingPlacement(size, playerIndex) {
+    if (!startingPlacements) {
+        let finalXY = size - 1;
+        startingPlacements = [
+            [0, 0],
+            [finalXY, finalXY],
+            [0, finalXY],
+            [finalXY, 0]
+        ];
+    }
+    return startingPlacements[playerIndex];
 }
