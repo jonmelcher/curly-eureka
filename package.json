@@ -11,6 +11,7 @@
     "watch": "rollup -c -w",
     "pretest": "npm run build",
     "test": "mocha",
+    "test-debug": "npm run build && node-debug _mocha",
     "prepublish": "npm test"
   },
   "repository": {
@@ -18,21 +19,13 @@
     "url": "git+ssh://git@github.com:jonmelcher/curly-eureka.git"
   },
   "author": "Jonathan Melcher <jonathan@viafoura.com>",
-  "contributors": [{
-    "name": "Dougal Graham",
-    "email": "dougal@viafoura.com"
-  }],
-  "license": "MIT",
-  "devDependencies": {
-    "babel-preset-es2015-rollup": "^1.2.0",
-    "rollup": "^0.34.13",
-    "rollup-plugin-babel": "^2.6.1"
-  },
-  "files": [
-      "src",
-      "dist"
+  "contributors": [
+    {
+      "name": "Dougal Graham",
+      "email": "dougal@viafoura.com"
+    }
   ],
-  "dependencies": {},
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^6.1.2",
     "babel-plugin-external-helpers": "^6.8.0",
@@ -42,9 +35,15 @@
     "eslint": "^3.2.2",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2",
+    "node-inspector": "^0.12.8",
     "rollup": "^0.34.7",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-istanbul": "^1.0.0",
     "rollup-watch": "^2.5.0"
-  }
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "dependencies": {}
 }
