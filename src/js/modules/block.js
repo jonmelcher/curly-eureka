@@ -1,11 +1,20 @@
 import * as Transforms from './transforms';
 
-export function Block(playerIndex, coordinates) {
+const areCoordinates = (coordinates) =>
+    Array.isArray(coordinates)
+    && coordinates.every((coord) =>
+        Array.isArray(coord)
+        && coord.every(Number.isInteger));
+
+export function Block(playerIndex, coordinates = []) {
     if (!Number.isInteger(playerIndex) || playerIndex < 0) {
         throw new TypeError(`invalid player index: ${playerIndex}`);
     }
+    if (!areCoordinates(coordinates)) {
+        throw new TypeError(`invalid coordinates: ${coordinates}`);
+    }
     this.id = playerIndex;
-    this.coordinates = coordinates || [];
+    this.coordinates = coordinates;
 }
 
 Block.prototype.rotateCW = function() {
