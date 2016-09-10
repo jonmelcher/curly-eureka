@@ -8,8 +8,8 @@ export function Board(size) {
 
 Board.prototype.place = function(block, location) {
     let coordinates = block.getContextualCoordinates(location);
-    coordinates.forEach((coord) => this._validatePlacement(coord, block.id));
-    coordinates.forEach((coord) => this._addSquare(coord, block.id));
+    coordinates.forEach((coord) => this._validatePlacement(coord, block.playerIndex));
+    coordinates.forEach((coord) => this._addSquare(coord, block.playerIndex));
 };
 
 Board.prototype._validatePlacement = function(coordinates, playerIndex) {

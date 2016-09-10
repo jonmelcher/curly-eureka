@@ -13,7 +13,7 @@ export function Block(playerIndex, coordinates = []) {
     if (!areCoordinates(coordinates)) {
         throw new TypeError(`invalid coordinates: ${coordinates}`);
     }
-    this.id = playerIndex;
+    this.playerIndex = playerIndex;
     this.coordinates = coordinates;
 }
 
