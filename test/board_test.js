@@ -1,3 +1,4 @@
+import '../node_modules/babel-polyfill/dist/polyfill';
 import { Board } from '../src/js/modules/board';
 import { Block } from '../src/js/modules/block';
 import { strictEqual, throws } from 'assert';
@@ -6,9 +7,9 @@ describe('game board', function() {
     describe('space', function() {
         it('can be any size', function() {
             let board = new Board(20);
-            strictEqual(board._squares.length, 20);
+            strictEqual(board._size, 20);
             board = new Board(0);
-            strictEqual(board._squares.length, 0);
+            strictEqual(board._size, 0);
         });
         it('excepts on invalid input', function() {
             throws(() => new Board());

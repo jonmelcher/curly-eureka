@@ -1,10 +1,21 @@
 export function Board(size) {
-    if (!Number.isInteger(size) || size < 0) {
+    if (!Number.isInteger(size) || size < 0 ) {
         throw new TypeError(`invalid board size: ${size}`);
     }
-    this._squares = new Array(size);
-    this._size = size;
     this._hasPlayed = new Array();
+    this._initBoard(size);
+}
+
+Board.prototype._initBoard = function(size) {
+    this._size = size;
+    this._squares = new Map();
+    const startingPlacements = [
+        [-1, -1],
+        [size, size],
+        [-1, size],
+        [size, -1]
+    ];
+    [ 0, 1, 2, 3 ].forEach((playerIndex) => this._addSquare(startingPlacements[playerIndex], playerIndex));
 }
 
 Board.prototype.place = function(block, location) {
@@ -18,24 +29,24 @@ Board.prototype._validatePlacement = function(coordinates, playerIndex) {
     if (coordinates.some((c) => this._isOffBoard(c))) {
         throw TypeError(`block is placed off the board at [${x}, ${y}]`);
     }
-    if (this._squares[x] !== undefined && this._squares[x][y] !== undefined) {
+    if (this._squares.has(x) && this._squares.get(x).has(y)) {
         throw TypeError(`block already placed at [${x}, ${y}]`);
     }
-    if (this._sameAdjacentPlayer(x, y, playerIndex)) {
+    if (this._samePlayer(x, y, playerIndex, adjacentSquares)) {
         throw TypeError(`block placed adjacent to same player [${x}, ${y}]`);
     }
-    if (!this._hasPlayed[playerIndex] && !this._isStartingPlacment(coordinates, playerIndex)) {
-        throw TypeError(`first play by player at invalid location [${x}, ${y}]`);
+    if (!this._samePlayer(x, y, playerIndex, adjacentCorners)) {
+        throw TypeError(`block placed adjacent to same player [${x}, ${y}]`);
     }
 };
 
 Board.prototype._addSquare = function(coordinates, playerIndex) {
     const [ x, y ] = coordinates;
-    let col = this._squares[x];
+    let col = this._squares.get(x);
     if (col === undefined) {
-        col = this._squares[x] = new Array(this._size);
+        col = this._squares.set(x, new Map()).get(x);
     }
-    col[y] = playerIndex;
+    col.set(y, playerIndex);
     this._hasPlayed[playerIndex] = true;
 }
 
@@ -43,19 +54,14 @@ Board.prototype._isOffBoard = function(coordinate) {
     return coordinate < 0 || coordinate >= this._size;
 }
 
-Board.prototype._sameAdjacentPlayer = function(x, y, playerIndex) {
-    return adjacentSquares(x, y)
+Board.prototype._samePlayer = function(x, y, playerIndex, squareGetter) {
+    return squareGetter(x, y)
         .some(([_x, _y]) => this._getSquare(_x, _y) === playerIndex);
 }
 
 Board.prototype._getSquare = function(x, y) {
-    return this._squares[x] && this._squares[x][y];
+    return this._squares.get(x) && this._squares.get(x).get(y);
 }
-
-Board.prototype._isStartingPlacment = function (coordinates, playerIndex) {
-    return getStartingPlacement(this._size, playerIndex)
-        .every((c, idx) => coordinates[idx] === c);
-};
 
 function adjacentSquares(x, y) {
     return [
@@ -66,16 +72,11 @@ function adjacentSquares(x, y) {
     ];
 }
 
-let startingPlacements;
-function getStartingPlacement(size, playerIndex) {
-    if (!startingPlacements) {
-        let finalXY = size - 1;
-        startingPlacements = [
-            [0, 0],
-            [finalXY, finalXY],
-            [0, finalXY],
-            [finalXY, 0]
-        ];
-    }
-    return startingPlacements[playerIndex];
+function adjacentCorners(x, y) {
+    return [
+        [ x - 1, y - 1],
+        [ x + 1, y - 1],
+        [ x - 1, y + 1],
+        [ x + 1, y + 1]
+    ];
 }

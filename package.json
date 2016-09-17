@@ -9,7 +9,6 @@
     "prebuild": "eslint lib test",
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
-    "pretest": "npm run build",
     "test": "mocha",
     "test-debug": "npm run build && node-debug _mocha",
     "prepublish": "npm test"

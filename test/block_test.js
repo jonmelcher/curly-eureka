@@ -1,3 +1,4 @@
+import '../node_modules/babel-polyfill/dist/polyfill';
 import { strictEqual, deepEqual, throws, ok } from 'assert';
 import { Block } from '../src/js/modules/block';
 
