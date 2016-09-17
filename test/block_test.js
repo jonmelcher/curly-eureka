@@ -1,3 +1,4 @@
+import '../node_modules/babel-polyfill/dist/polyfill';
 import { strictEqual, deepEqual, throws, ok } from 'assert';
 import { Block } from '../src/js/modules/block';
 
@@ -23,7 +24,7 @@ describe('blocks', () => {
             const b = new Block(3);
             strictEqual(Object.keys(b).length, 2);
             deepEqual(b.coordinates, []);
-            strictEqual(b.id, 3);
+            strictEqual(b.playerIndex, 3);
         });
     });
     describe('context-full-coordinates', () => {
