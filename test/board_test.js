@@ -33,10 +33,14 @@ describe('game board', function() {
             throws(() => board.place(block, [ loc, loc ]));
             board = new Board(20);
             board.place(block, [ 0, 0 ]);
+
             let p2Block = new Block(1, [ [ 0, 0 ] ]);
             board.place(p2Block, [ 19, 19 ]);
             board = new Board(20);
             throws(() => board.place(block, [ 5, 5 ]));
+
+            block = new Block(0, [ [ 0, 0 ], [ 1, 0 ] ]);
+            board.place(block, [ 0, 0 ]);
         });
         it('ensures a non-first block is played such that it doesn\'t overlap other blocks', function() {
             board.place(block, [ 0, 0 ]);
