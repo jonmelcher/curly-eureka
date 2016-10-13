@@ -10,8 +10,7 @@
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
     "test": "mocha",
-    "test-debug": "npm run build && node-debug _mocha",
-    "prepublish": "npm test"
+    "test-debug": "npm run build && node-debug _mocha"
   },
   "repository": {
     "type": "git",
@@ -33,6 +32,7 @@
     "babel-register": "^6.11.6",
     "babelrc-rollup": "^3.0.0",
     "eslint": "^3.2.2",
+    "imagediff": "^1.0.8",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2",
     "node-inspector": "^0.12.8",
