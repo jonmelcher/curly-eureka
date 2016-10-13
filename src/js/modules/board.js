@@ -19,24 +19,25 @@ Board.prototype._initBoard = function(size) {
 }
 
 Board.prototype.place = function(block, location) {
-    let coordinates = block.getContextualCoordinates(location);
-    coordinates.forEach((coord) => this._validatePlacement(coord, block.playerIndex));
+    const coordinates = block.getContextualCoordinates(location);
+    this._validatePlacement(coordinates, block.playerIndex);
     coordinates.forEach((coord) => this._addSquare(coord, block.playerIndex));
 };
 
 Board.prototype._validatePlacement = function(coordinates, playerIndex) {
-    const [ x, y ] = coordinates;
-    if (coordinates.some((c) => this._isOffBoard(c))) {
-        throw TypeError(`block is placed off the board at [${x}, ${y}]`);
-    }
-    if (this._squares.has(x) && this._squares.get(x).has(y)) {
-        throw TypeError(`block already placed at [${x}, ${y}]`);
-    }
-    if (this._samePlayer(x, y, playerIndex, adjacentSquares)) {
-        throw TypeError(`block placed adjacent to same player [${x}, ${y}]`);
-    }
-    if (!this._samePlayer(x, y, playerIndex, adjacentCorners)) {
-        throw TypeError(`block placed adjacent to same player [${x}, ${y}]`);
+    coordinates.forEach(([ x, y ]) => {
+        if ([ x, y ].some((c) => this._isOffBoard(c))) {
+            throw TypeError(`block is placed off the board at [${x}, ${y}]`);
+        }
+        if (this._squares.has(x) && this._squares.get(x).has(y)) {
+            throw TypeError(`block already placed at [${x}, ${y}]`);
+        }
+        if (this._samePlayer(x, y, playerIndex, adjacentSquares)) {
+            throw TypeError(`block placed adjacent to same player [${x}, ${y}]`);
+        }
+    });
+    if  (!coordinates.some(([ x, y ]) => this._samePlayer(x, y, playerIndex, adjacentCorners))) {
+        throw TypeError(`block disconnected from other blocks ${coordinates}`);
     }
 };
 
