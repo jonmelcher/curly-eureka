@@ -1,7 +1,7 @@
 {
   "name": "blokjs",
   "version": "0.0.0",
-  "description": "Proof of concept / playing around with Rollup",
+  "description": "BlokJS",
   "main": "dist/blokjs.js",
   "module": "dist/blokjs.mjs",
   "jsnext:main": "dist/blokjs.mjs",
@@ -20,7 +20,7 @@
   "contributors": [
     {
       "name": "Dougal Graham",
-      "email": "dougal@viafoura.com"
+      "email": "dougalg@gmail.com"
     }
   ],
   "license": "MIT",

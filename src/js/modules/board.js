@@ -24,6 +24,10 @@ Board.prototype.place = function(block, location) {
     coordinates.forEach((coord) => this._addSquare(coord, block.playerIndex));
 };
 
+Board.prototype.getSize = function() {
+    return this._size;
+};
+
 Board.prototype._validatePlacement = function(coordinates, playerIndex) {
     coordinates.forEach(([ x, y ]) => {
         if ([ x, y ].some((c) => this._isOffBoard(c))) {
@@ -52,7 +56,7 @@ Board.prototype._addSquare = function(coordinates, playerIndex) {
 }
 
 Board.prototype._isOffBoard = function(coordinate) {
-    return coordinate < 0 || coordinate >= this._size;
+    return coordinate < 0 || coordinate >= this.getSize();
 }
 
 Board.prototype._samePlayer = function(x, y, playerIndex, squareGetter) {

@@ -1,9 +1,9 @@
 import '../../node_modules/babel-polyfill/dist/polyfill';
-import * as transforms from './modules/transforms';
-import { Block } from './modules/block';
-import { BlockBuilder } from './modules/block_builder';
+import { BoardDrawer } from './modules/board_drawer';
 import { Board } from './modules/board';
 
-export {
-    transforms, Block, BlockBuilder, Board
-}
+const canvas = document.querySelector('.js-board');
+const board = new Board(20);
+const drawer = new BoardDrawer(canvas, board);
+
+drawer.draw();
