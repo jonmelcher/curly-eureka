@@ -1,6 +1,6 @@
-import '../node_modules/babel-polyfill/dist/polyfill';
+import '../../node_modules/babel-polyfill/dist/polyfill';
 import { strictEqual, deepEqual, throws, ok } from 'assert';
-import { Block } from '../src/js/modules/block';
+import { Block } from '../../src/js/modules/block';
 
 describe('blocks', () => {
     describe('constructor', () => {

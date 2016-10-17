@@ -39,7 +39,7 @@ BoardDrawer.prototype._validateCanvas = function() {
     }
     const inner_square_side_length_decimals = this._getInnerSquareSideLength() % 1;
     if (inner_square_side_length_decimals != 0) {
-        throw new Error(`The squares are not an even number of pixels wide or high [${inner_square_side_length_decimals}]`);
+        throw new Error(`The squares are not an even number of pixels wide or high [${this._getInnerSquareSideLength()}]`);
     }
 }
 

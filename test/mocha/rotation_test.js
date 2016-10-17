@@ -1,5 +1,5 @@
 import { deepEqual } from 'assert';
-import { reflectX, reflectY, rotateCW, rotateCCW } from '../src/js/modules/transforms';
+import { reflectX, reflectY, rotateCW, rotateCCW } from '../../src/js/modules/transforms';
 
 describe('block rotations', () => {
     describe('zero vector', () => {
