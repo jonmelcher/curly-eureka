@@ -1,6 +1,6 @@
-import '../node_modules/babel-polyfill/dist/polyfill';
-import { Board } from '../src/js/modules/board';
-import { Block } from '../src/js/modules/block';
+import '../../node_modules/babel-polyfill/dist/polyfill';
+import { Board } from '../../src/js/modules/board';
+import { Block } from '../../src/js/modules/block';
 import { strictEqual, throws } from 'assert';
 
 describe('game board', function() {
